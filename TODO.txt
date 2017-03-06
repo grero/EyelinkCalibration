@@ -1,5 +1,4 @@
 #FIXME: Some trials seem to be neither correct nor incorrect
-#FIXME: Check that the EDF filename does not exceed 8 characters
 #TODO: Add target crosses in the fixation task as well.
 #TODO: Separate experimental time into time on task and idle time
 #WIP: Randomly cycle through fixation locations which can be interrupted, should be resumed when done
