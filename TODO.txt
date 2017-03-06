@@ -2,5 +2,5 @@
 #FIXME: Check that the EDF filename does not exceed 8 characters
 #TODO: Add target crosses in the fixation task as well.
 #TODO: Separate experimental time into time on task and idle time
-#TODO: Randomly cycle through fixation locations which can be interrupted, should be resumed when done
+#WIP: Randomly cycle through fixation locations which can be interrupted, should be resumed when done
 #TODO: Adjust ITI according to the motivation of the monkey
