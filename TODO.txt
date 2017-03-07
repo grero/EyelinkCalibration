@@ -1,5 +1,5 @@
 #WIP: Make sure we align the trials to the screen flip
-#FIXME: Some trials seem to be neither correct nor incorrect
+#FIXME: Some trials seem to be neither correct nor incorrect. This seems to happen when trials are aborted.
 #TODO: Add plots for the experimenter
 #TODO: Add target crosses in the fixation task as well.
 #TODO: Separate experimental time into time on task and idle time
