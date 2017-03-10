@@ -1,5 +1,4 @@
 #WIP: Make sure we align the trials to the screen flip
-#FIXME: Only send strobes to eyelink immediately before the flip
 #TODO: Add plots for the experimenter
 #TODO: Add target crosses in the fixation task as well.
 #TODO: Separate experimental time into time on task and idle time
