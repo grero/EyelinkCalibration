@@ -1,5 +1,4 @@
 #TODO: Make sure we can send strobes through the parallel port
-#TODO: Give feedback on the number of trials after each trial
 #WIP: Make sure we align the trials to the screen flip
 #TODO: Figure out why python crashes
 #TODO: Add plots for the experimenter
