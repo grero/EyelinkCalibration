@@ -10,3 +10,4 @@
 #TODO: Look into having a separate calibration button
 #TODO: Try using 2kHz sampling for eyelink
 #WIP: Add feedback on the experimenter's plot on how many trials have been completed
+#TODO: Add drift correct
