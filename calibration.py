@@ -1,6 +1,6 @@
 import pylink
 from pylinkwrapper import psychocal
-from psychopy import sound
+from psychopy import sound, visual
 
 class Calibration(psychocal.psychocal):
     def __init__(self, w,h, tracker, window,reward):
@@ -8,6 +8,10 @@ class Calibration(psychocal.psychocal):
         self.reward = reward
         self.duration = reward.duration
 
+        self.tcolor = 1
+        self.targetout = visual.Circle(self.window, pos=(0, 0), radius=20,
+                                       fillColor=self.tcolor,
+                                       lineColor=self.tcolor, units='pix')
         #override sound settings to use reward duration
         self.__target_beep__ = sound.Sound(800, secs=self.duration)
         self.__target_beep__done__ = sound.Sound(1200, secs=self.duration)
@@ -22,6 +26,18 @@ class Calibration(psychocal.psychocal):
             self.__target_beep__error__.play()
         else:  # CAL_GOOD_BEEP or DC_GOOD_BEEP
             self.__target_beep__done__.play()
+
+    def draw_cal_target(self, x, y):
+        # Convert to psychopy coordinates
+        x = x - (self.sres[0] / 2)
+        y = -(y - (self.sres[1] / 2))
+
+        # Set calibration target position
+        self.targetout.pos = (x, y)
+
+        # Display
+        self.targetout.draw()
+        self.window.flip()
 
 def calibrate(tracker, reward, cnum=13, paval=1000):
     """
