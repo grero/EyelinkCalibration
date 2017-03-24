@@ -1,18 +1,23 @@
 import serial
+import warnings
 from psychopy import core
 
 class Reward:
     def __init__(self, serialpath=None, reward_duration=0.5):
+        self.dummy = False
         if serialpath is None:
             self.port = None
         else:
             try:
                 self.port = serial.Serial(serialpath)
                 self.port.setRTS(0) #start in closed mode
-            except OSError:
+            except:
                 self.port = None
+                self.dummy = True
+                warnings.warn("Could not open serial port at %s" %(serialpath, ))
 
         self.duration = reward_duration
+        self.total_duration = 0.0
 
     def open(self):
         if self.port is not None:
