@@ -1,6 +1,9 @@
 import pylink
 from pylinkwrapper import psychocal
-from psychopy import sound, visual
+from psychopy import sound, visual,event, tools
+from psychopy.tools import monitorunittools
+deg2pix = monitorunittools.deg2pix
+
 
 class Calibration(psychocal.psychocal):
     def __init__(self, w,h, tracker, window,reward):
@@ -38,6 +41,23 @@ class Calibration(psychocal.psychocal):
         # Display
         self.targetout.draw()
         self.window.flip()
+
+    def get_mouse_state(self):
+        if self.mouse is None:
+            self.mouse = event.Mouse()
+
+        # Get mouse state
+        mpos = self.mouse.getPos()
+        mpre = self.mouse.getPressed()
+
+        # Convert mpos to EyeLink coordinates
+        mpos = [int(deg2pix(x, self.window.monitor)) for x in mpos]
+        mpos = (int(mpos[0] + (self.sres[0] / 2)),
+                int(mpos[1] + (self.sres[1] / 2)))
+
+        # Return
+        return (mpos, mpre[0])
+
 
 def calibrate(tracker, reward, cnum=13, paval=1000):
     """
