@@ -22,9 +22,8 @@ class Calibration(psychocal.psychocal):
 
     def play_beep(self,beepid):
         if beepid == pylink.DC_TARG_BEEP or beepid == pylink.CAL_TARG_BEEP:
-            self.reward.open()
             self.__target_beep__.play()
-            self.reward.close()
+            self.reward.deliver()
         elif beepid == pylink.CAL_ERR_BEEP or beepid == pylink.DC_ERR_BEEP:
             self.__target_beep__error__.play()
         else:  # CAL_GOOD_BEEP or DC_GOOD_BEEP
