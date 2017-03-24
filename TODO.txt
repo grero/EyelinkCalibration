@@ -1,3 +1,4 @@
+#TODO: Allow experimenter to flash the calibration spot during calibration
 #TODO: Make sure we can send strobes through the parallel port
 #WIP: Make sure we align the trials to the screen flip
 #TODO: Figure out why python crashes
