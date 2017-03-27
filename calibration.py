@@ -6,15 +6,17 @@ deg2pix = monitorunittools.deg2pix
 
 
 class Calibration(psychocal.psychocal):
-    def __init__(self, w,h, tracker, window,reward):
+    def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20):
         psychocal.psychocal.__init__(self, w, h, tracker, window)
         self.reward = reward
         self.duration = reward.duration
 
-        self.tcolor = 1
-        self.targetout = visual.Circle(self.window, pos=(0, 0), radius=20,
+        self.tcolor = target_color
+        self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
                                        fillColor=self.tcolor,
-                                       lineColor=self.tcolor, units='pix')
+                                       lineColor=self.tcolor, units='pix',
+                                       fillColorSpace='rgb',
+                                       lineColorSpace='rgb')
         #override sound settings to use reward duration
         self.__target_beep__ = sound.Sound(800, secs=self.duration)
         self.__target_beep__done__ = sound.Sound(1200, secs=self.duration)
@@ -50,15 +52,16 @@ class Calibration(psychocal.psychocal):
         mpre = self.mouse.getPressed()
 
         # Convert mpos to EyeLink coordinates
-        mpos = [int(deg2pix(x, self.window.monitor)) for x in mpos]
-        mpos = (int(mpos[0] + (self.sres[0] / 2)),
-                int(mpos[1] + (self.sres[1] / 2)))
+       # mpos = [int(deg2pix(x, self.window.monitor)) for x in mpos]
+       # mpos = (int(mpos[0] + (self.sres[0] / 2)),
+       #         int(mpos[1] + (self.sres[1] / 2)))
 
         # Return
         return (mpos, mpre[0])
 
 
-def calibrate(tracker, reward, cnum=13, paval=1000):
+def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
+              target_size=1.0):
     """
     Calibrates eye-tracker using psychopy stimuli.
 
@@ -72,7 +75,8 @@ def calibrate(tracker, reward, cnum=13, paval=1000):
 
     # Generate custom calibration stimuli
     genv = Calibration(tracker.sres[0], tracker.sres[1],
-                               tracker.tracker, tracker.win, reward)
+                               tracker.tracker, tracker.win, reward,
+                       target_color, target_size)
 
     if tracker.realconnect:
         # Set calibration type
