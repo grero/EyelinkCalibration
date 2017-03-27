@@ -55,9 +55,9 @@ class Calibration(psychocal.psychocal):
         mpre = self.mouse.getPressed()
 
         # Convert mpos to EyeLink coordinates
-       # mpos = [int(deg2pix(x, self.window.monitor)) for x in mpos]
-       # mpos = (int(mpos[0] + (self.sres[0] / 2)),
-       #         int(mpos[1] + (self.sres[1] / 2)))
+        mpos = [int(deg2pix(x, self.window.monitor)) for x in mpos]
+        mpos = (int(mpos[0] + (self.sres[0] / 2)),
+               int(mpos[1] + (self.sres[1] / 2)))
 
         # Return
         return (mpos, mpre[0])
