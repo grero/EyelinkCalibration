@@ -31,6 +31,9 @@ class Calibration(psychocal.psychocal):
         else:  # CAL_GOOD_BEEP or DC_GOOD_BEEP
             self.__target_beep__done__.play()
 
+    def setup_cal_display(self):
+        self.window.flip()
+
     def draw_cal_target(self, x, y):
         # Convert to psychopy coordinates
         x = x - (self.sres[0] / 2)
