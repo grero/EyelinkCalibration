@@ -67,6 +67,9 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
               target_size=1.0):
     """
     Calibrates eye-tracker using psychopy stimuli.
+    :param tracker: Tracker object to communicate with eyelink
+
+    :param reward: Reward object to disperse liquid reward through a serial port
 
     :param cnum: Number of points to use for calibration. Options are 3, 5,
                  9, 13.
@@ -74,6 +77,12 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
     :param paval: Pacing of calibration, i.e. how long you have to fixate
                   each target in milliseconds.
     :type paval: int
+
+    :param target_color: Color of calibration target
+    :type target_color: int or (float, float, float)
+
+    :param target_size: Radius of calibration target in pixels
+    :type target_size: float
     """
 
     # Generate custom calibration stimuli
