@@ -1,5 +1,4 @@
 #TODO: Allow 5 point calibration (cross)
-#WIP: Make sure the solenoid is always closed at the end of the task
 #TODO: Have a separate calibration task (maybe not)
 #TODO: Allow experimenter to flash the calibration spot during calibration
 #TODO: We could check that the monkey does not enter other locations other than the target in the response window
