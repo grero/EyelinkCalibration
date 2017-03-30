@@ -1,7 +1,6 @@
 #TODO: Bring a notebook so that we can keep notes during the experiment
 
 #TODO: reset session count if date is different
-#TODO: Allow 5 point calibration (cross)
 #TODO: Have a separate calibration task (maybe not)
 #TODO: Allow experimenter to flash the calibration spot during calibration
 #TODO: We could check that the monkey does not enter other locations other than the target in the response window
