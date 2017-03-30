@@ -1,3 +1,8 @@
+#TODO: Allow 5 point calibration (cross)
+#TODO: Have a separate calibration task (maybe not)
+#TODO: Allow experimenter to flash the calibration spot during calibration
+#TODO: We could check that the monkey does not enter other locations other than the target in the response window
+#TODO: Install pygit2 on the windows computer
 #TODO: Make sure we can send strobes through the parallel port
 #WIP: Make sure we align the trials to the screen flip
 #TODO: Figure out why python crashes
@@ -10,4 +15,5 @@
 #TODO: Look into having a separate calibration button
 #TODO: Try using 2kHz sampling for eyelink
 #WIP: Add feedback on the experimenter's plot on how many trials have been completed
-#TODO: Add drift correct
+#TODO: Add drift correct. We might be better off just recalibrating
+
