@@ -1,5 +1,4 @@
 #TODO: Bring a notebook so that we can keep notes during the experiment
-#TODO: Unselect calibration if we have already calibrated once
 
 #TODO: reset session count if date is different
 #TODO: Allow 5 point calibration (cross)
