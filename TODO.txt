@@ -1,4 +1,3 @@
-#TODO: We should cut off reward before the next trial begins, rather than at the end of the end of the current trial
 #TODO: Bring a notebook so that we can keep notes during the experiment
 #TODO: Unselect calibration if we have already calibrated once
 
