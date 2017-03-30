@@ -25,3 +25,6 @@ Wiesel eye position:
 90 cm from the floor
 
 66 cm from sceen
+
+90 cm from floor
+67 cm from screen
