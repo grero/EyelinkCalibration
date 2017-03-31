@@ -19,3 +19,5 @@
 #WIP: Add feedback on the experimenter's plot on how many trials have been completed
 #TODO: Add drift correct. We might be better off just recalibrating
 
+#TODO: Create a file writing module to keep track of version number of the settings
+
