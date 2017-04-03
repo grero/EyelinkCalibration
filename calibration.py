@@ -6,17 +6,22 @@ deg2pix = monitorunittools.deg2pix
 
 
 class Calibration(psychocal.psychocal):
-    def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20):
+    def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,target_image=None):
         psychocal.psychocal.__init__(self, w, h, tracker, window)
         self.reward = reward
         self.duration = reward.duration
 
         self.tcolor = target_color
-        self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
+        if target_image is None:
+            self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
                                        fillColor=self.tcolor,
                                        lineColor=self.tcolor, units='pix',
                                        fillColorSpace='rgb',
                                        lineColorSpace='rgb')
+        else:
+            self.targetout = visual.ImageStim(self.window, target_image,
+                                             size=target_size, units="pix")
+
         #override sound settings to use reward duration
         self.__target_beep__ = sound.Sound(800, secs=self.duration)
         self.__target_beep__done__ = sound.Sound(1200, secs=self.duration)
@@ -64,7 +69,7 @@ class Calibration(psychocal.psychocal):
 
 
 def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
-              target_size=1.0):
+              target_size=1.0,target_image=None):
     """
     Calibrates eye-tracker using psychopy stimuli.
     :param tracker: Tracker object to communicate with eyelink
@@ -88,7 +93,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
     # Generate custom calibration stimuli
     genv = Calibration(tracker.sres[0], tracker.sres[1],
                                tracker.tracker, tracker.win, reward,
-                       target_color, target_size)
+                       target_color, target_size,target_image)
 
     if tracker.realconnect:
         # Set calibration type
