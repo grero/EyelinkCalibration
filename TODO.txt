@@ -2,6 +2,8 @@
 attention. Or, just drag a picture around.
 #TODO: Add reward amount given in trial by trial feedback
 #TODO: Maybe add a fixation distribution around each fixation target
+#TODO: Try using 'return' key callback to give reward when a calibration point is accepted
+#TODO: Bring a notebook so that we can keep notes during the experiment
 #TODO: Have a separate calibration task (maybe not)
 #TODO: Allow experimenter to flash the calibration spot during calibration
 #TODO: We could check that the monkey does not enter other locations other than the target in the response window
