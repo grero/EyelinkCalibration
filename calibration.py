@@ -4,20 +4,37 @@ from psychopy import sound, visual,event, tools
 from psychopy.tools import monitorunittools
 deg2pix = monitorunittools.deg2pix
 
+#subclass GratingStim so that we can create a grating that updates its phase at every draw
+class MovingGratingStim(visual.GratingStim):
+    def __init__(self, *args, **kwargs):
+        visual.GratingStim.__init__(self, *args,**kwargs)
+        self.animate = False
+
+    def draw(self,win=None):
+        #self.phase += 0.01
+        visual.GratingStim.draw(self, win)
 
 class Calibration(psychocal.psychocal):
-    def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,target_image=None):
+    def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,
+                 target_image=None,use_gabor=False):
         psychocal.psychocal.__init__(self, w, h, tracker, window)
         self.reward = reward
         self.duration = reward.duration
+        self.phase = 0.0
+        self.use_gabor = use_gabor
 
         self.tcolor = target_color
         if target_image is None:
-            self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
+            if not use_gabor:
+                self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
                                        fillColor=self.tcolor,
                                        lineColor=self.tcolor, units='pix',
                                        fillColorSpace='rgb',
                                        lineColorSpace='rgb')
+            else:
+                self.targetout = MovingGratingStim(self.window, mask='gauss', units="pix", sf=5/target_size,
+                                                ori=60.0, size=target_size,
+                                                color=target_color, colorSpace='rgb')
         else:
             self.targetout = visual.ImageStim(self.window, target_image,
                                              size=target_size, units="pix")
@@ -46,9 +63,16 @@ class Calibration(psychocal.psychocal):
 
         # Set calibration target position
         self.targetout.pos = (x, y)
+        if self.use_gabor:
+            self.targetout.animate = True
+        else:
+            # Display
+            self.targetout.draw()
+            self.window.flip()
 
-        # Display
-        self.targetout.draw()
+    def erase_cal_target(self):
+        if self.use_gabor:
+            self.targetout.animate = False
         self.window.flip()
 
     def get_mouse_state(self):
@@ -67,9 +91,45 @@ class Calibration(psychocal.psychocal):
         # Return
         return (mpos, mpre[0])
 
+    def get_input_key(self):
+        ky = []
+        v = event.getKeys()
+
+        for key in v:
+            pylink_key = None
+            if len(key) == 1:
+                pylink_key = ord(key)
+            elif key == "escape":
+                pylink_key = pylink.ESC_KEY
+            elif key == "return":
+                pylink_key = pylink.ENTER_KEY
+            elif key == "pageup":
+                pylink_key = pylink.PAGE_UP
+            elif key == "pagedown":
+                pylink_key = pylink.PAGE_DOWN
+            elif key == "up":
+                pylink_key = pylink.CURS_UP
+            elif key == "down":
+                pylink_key = pylink.CURS_DOWN
+            elif key == "left":
+                pylink_key = pylink.CURS_LEFT
+            elif key == "right":
+                pylink_key = pylink.CURS_RIGHT
+            else:
+                print('Error! :{} is not a used key.'.format(key))
+                return
+
+            ky.append(pylink.KeyInput(pylink_key, 0))
+        if self.use_gabor and self.targetout.animate:
+            self.targetout.phase += 0.01 #update the grating phase
+            self.targetout.draw()
+            self.window.flip()
+        return ky
+
+
 
 def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
-              target_size=1.0,target_image=None):
+              target_size=1.0,target_image=None,use_gabor=False):
     """
     Calibrates eye-tracker using psychopy stimuli.
     :param tracker: Tracker object to communicate with eyelink
@@ -93,7 +153,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
     # Generate custom calibration stimuli
     genv = Calibration(tracker.sres[0], tracker.sres[1],
                                tracker.tracker, tracker.win, reward,
-                       target_color, target_size,target_image)
+                       target_color, target_size,target_image,use_gabor)
 
     if tracker.realconnect:
         # Set calibration type
