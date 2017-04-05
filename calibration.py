@@ -4,16 +4,6 @@ from psychopy import sound, visual,event, tools
 from psychopy.tools import monitorunittools
 deg2pix = monitorunittools.deg2pix
 
-#subclass GratingStim so that we can create a grating that updates its phase at every draw
-class MovingGratingStim(visual.GratingStim):
-    def __init__(self, *args, **kwargs):
-        visual.GratingStim.__init__(self, *args,**kwargs)
-        self.animate = False
-
-    def draw(self,win=None):
-        #self.phase += 0.01
-        visual.GratingStim.draw(self, win)
-
 class Calibration(psychocal.psychocal):
     def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,
                  target_image=None,use_gabor=False):
@@ -21,6 +11,7 @@ class Calibration(psychocal.psychocal):
         self.reward = reward
         self.duration = reward.duration
         self.phase = 0.0
+        self.animate = False
         self.use_gabor = use_gabor
 
         self.tcolor = target_color
@@ -32,7 +23,7 @@ class Calibration(psychocal.psychocal):
                                        fillColorSpace='rgb',
                                        lineColorSpace='rgb')
             else:
-                self.targetout = MovingGratingStim(self.window, mask='gauss', units="pix", sf=5/target_size,
+                self.targetout = visual.GratingStim(self.window, mask='gauss', units="pix", sf=5/target_size,
                                                 ori=60.0, size=target_size,
                                                 color=target_color, colorSpace='rgb')
         else:
@@ -64,7 +55,7 @@ class Calibration(psychocal.psychocal):
         # Set calibration target position
         self.targetout.pos = (x, y)
         if self.use_gabor:
-            self.targetout.animate = True
+            self.animate = True
         else:
             # Display
             self.targetout.draw()
@@ -72,7 +63,7 @@ class Calibration(psychocal.psychocal):
 
     def erase_cal_target(self):
         if self.use_gabor:
-            self.targetout.animate = False
+            self.animate = False
         self.window.flip()
 
     def get_mouse_state(self):
@@ -121,8 +112,8 @@ class Calibration(psychocal.psychocal):
 
             ky.append(pylink.KeyInput(pylink_key, 0))
         #update the phase here as this function is polled regularly
-        if self.use_gabor and self.targetout.animate:
-            self.targetout.phase += 0.01 #update the grating phase
+        if self.use_gabor and self.animate:
+            self.targetout.phase += 0.05 #update the grating phase
             self.targetout.draw()
             self.window.flip()
         return ky
