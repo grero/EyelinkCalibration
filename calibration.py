@@ -120,6 +120,7 @@ class Calibration(psychocal.psychocal):
                 return
 
             ky.append(pylink.KeyInput(pylink_key, 0))
+        #update the phase here as this function is polled regularly
         if self.use_gabor and self.targetout.animate:
             self.targetout.phase += 0.01 #update the grating phase
             self.targetout.draw()
