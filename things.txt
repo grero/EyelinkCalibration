@@ -28,3 +28,5 @@ Wiesel eye position:
 
 90 cm from floor
 67 cm from screen
+
+infra-red camera: Model: DLM-680SEV
