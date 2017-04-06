@@ -1,3 +1,4 @@
+#TODO: Add uncertainty to the fixation tracking
 #TODO: Maintain a count of total reward, correct, and incorrect trials for the day
 #TODO: Use a moving grating as the calibration target. Right now he is just glancing at the dots/banana, but looks away too
 quickly to identify a fixation
