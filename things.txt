@@ -30,3 +30,4 @@ Wiesel eye position:
 67 cm from screen
 
 infra-red camera: Model: DLM-680SEV
+we need to get a BNC to RCA converter for the camera, so that we can connect it to the elgato.
