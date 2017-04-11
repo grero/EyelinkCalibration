@@ -31,3 +31,6 @@ Wiesel eye position:
 
 infra-red camera: Model: DLM-680SEV
 we need to get a BNC to RCA converter for the camera, so that we can connect it to the elgato.
+
+Regarding calibration, Eyelink will also use the latest calibration model, i.e. calibrating on Monday and running a
+different experiment on Tuesday will use Monday's calibration.
