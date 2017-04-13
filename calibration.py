@@ -37,6 +37,7 @@ class Calibration(psychocal.psychocal):
 
     def play_beep(self,beepid):
         if beepid == pylink.DC_TARG_BEEP or beepid == pylink.CAL_TARG_BEEP:
+            self.reward.deliver()
             self.__target_beep__.play()
         elif beepid == pylink.CAL_ERR_BEEP or beepid == pylink.DC_ERR_BEEP:
             self.__target_beep__error__.play()
@@ -88,11 +89,15 @@ class Calibration(psychocal.psychocal):
         for key in v:
             pylink_key = None
             if len(key) == 1:
-                pylink_key = ord(key)
+                if key.isdigit():
+                    pylink_key = int(key)
+                    #print pylink_key
+                else:
+                    pylink_key = ord(key)
             elif key == "escape":
                 pylink_key = pylink.ESC_KEY
             elif key == "return":
-                self.reward.deliver()
+                #self.reward.deliver()
                 pylink_key = pylink.ENTER_KEY
             elif key == "pageup":
                 pylink_key = pylink.PAGE_UP
