@@ -121,12 +121,15 @@ class Calibration(psychocal.psychocal):
             self.targetout.phase += 0.05 #update the grating phase
             self.targetout.draw()
             self.window.flip()
+        elif self.pulse_dot:
+            self.targetout.contrast = np.sin(2*np.pi*self.clock.getTime()/5.0)
         return ky
 
 
 
 def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
-              target_size=1.0,target_image=None,use_gabor=False):
+              target_size=1.0,target_image=None,use_gabor=False,pulse_dot=False,
+              manual_calibration=False):
     """
     Calibrates eye-tracker using psychopy stimuli.
     :param tracker: Tracker object to communicate with eyelink
@@ -157,9 +160,22 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
         calst = 'HV{}'.format(cnum)
         tracker.tracker.setCalibrationType(calst)
 
-        # Set calibraiton pacing
-        tracker.tracker.setAutoCalibrationPacing(paval)
-
+        # Set calibration pacing
+        if manual_calibration:
+            tracker.tracker.send_command("remote_cal_enable = 1")
+            tracker.trakcer.send_command("key_function 1 'remote_cal_target 1'")
+            tracker.trakcer.send_command("key_function 2 'remote_cal_target 2'")
+            tracker.trakcer.send_command("key_function 3 'remote_cal_target 3'")
+            tracker.trakcer.send_command("key_function 4 'remote_cal_target 4'")
+            tracker.trakcer.send_command("key_function 5 'remote_cal_target 5'")
+            tracker.trakcer.send_command("key_function 6 'remote_cal_target 6'")
+            tracker.trakcer.send_command("key_function 7 'remote_cal_target 7'")
+            tracker.trakcer.send_command("key_function 8 'remote_cal_target 8'")
+            tracker.trakcer.send_command("key_function 9 'remote_cal_target 9'")
+            tracker.tracker.send_commnad("key_function ins 'remote_cal_complete'")
+        else:
+            tracker.tracker.send_command("remote_cal_enable = 1")
+            tracker.tracker.setAutoCalibrationPacing(paval)
         # Execute custom calibration display
         print '*' * 150
         print 'Calibration Mode'
