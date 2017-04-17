@@ -121,8 +121,6 @@ class Calibration(psychocal.psychocal):
             self.targetout.phase += 0.05 #update the grating phase
             self.targetout.draw()
             self.window.flip()
-        elif self.pulse_dot:
-            self.targetout.contrast = np.sin(2*np.pi*self.clock.getTime()/5.0)
         return ky
 
 
