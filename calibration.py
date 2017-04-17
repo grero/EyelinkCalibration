@@ -165,14 +165,14 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
             tracker.send_command("key_function 2 'remote_cal_target 2'")
             tracker.send_command("key_function 3 'remote_cal_target 3'")
             tracker.send_command("key_function 4 'remote_cal_target 4'")
-            tracker.trakcer.send_command("key_function 5 'remote_cal_target 5'")
-            tracker.trakcer.send_command("key_function 6 'remote_cal_target 6'")
-            tracker.trakcer.send_command("key_function 7 'remote_cal_target 7'")
-            tracker.trakcer.send_command("key_function 8 'remote_cal_target 8'")
-            tracker.trakcer.send_command("key_function 9 'remote_cal_target 9'")
-            tracker.tracker.send_commnad("key_function ins 'remote_cal_complete'")
+            tracker.send_command("key_function 5 'remote_cal_target 5'")
+            tracker.send_command("key_function 6 'remote_cal_target 6'")
+            tracker.send_command("key_function 7 'remote_cal_target 7'")
+            tracker.send_command("key_function 8 'remote_cal_target 8'")
+            tracker.send_command("key_function 9 'remote_cal_target 9'")
+            tracker.send_command("key_function ins 'remote_cal_complete'")
         else:
-            tracker.tracker.send_command("remote_cal_enable = 1")
+            tracker.send_command("remote_cal_enable = 1")
             tracker.tracker.setAutoCalibrationPacing(paval)
         # Execute custom calibration display
         print '*' * 150
