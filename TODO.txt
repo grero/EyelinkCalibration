@@ -1,3 +1,5 @@
+#TODO: Fix a bug where the image cannot be found for calibration
+#TODO: ITI does not get saved
 #TODO: Reset all counters when the subject name changes
 #FIXME: Make sure to reset manual calibration setting (just merge the manual_calibration branch)
 #FIXME: The program crashes sometimes, possiblity after overlaying the video ontop of the gray screen
