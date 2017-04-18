@@ -89,10 +89,6 @@ class Calibration(psychocal.psychocal):
         for key in v:
             pylink_key = None
             if len(key) == 1:
-                #if key.isdigit():
-                #    pylink_key = int(key)
-                    #print pylink_key
-                #else:
                 pylink_key = ord(key)
             elif key == "escape":
                 pylink_key = pylink.ESC_KEY
