@@ -156,6 +156,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
 
         # Set calibration pacing
         if manual_calibration:
+            print "Using manual calibration"
             tracker.send_command("remote_cal_enable = 1")
             tracker.send_command("key_function 1 'remote_cal_target 1'")
             tracker.send_command("key_function 2 'remote_cal_target 2'")
