@@ -1,3 +1,4 @@
+#TODO: Find a way to reward only when a fixation is accepted during calibration
 #TODO: Reset all counters when the subject name changes
 #FIXME: The program crashes sometimes, possiblity after overlaying the video ontop of the gray screen
 #TODO: Use a pulsating dot as the calibration target
