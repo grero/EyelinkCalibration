@@ -168,6 +168,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
             tracker.send_command("key_function 9 'remote_cal_target 9'")
             tracker.send_command("key_function y 'remote_cal_complete'")
         else:
+            print "Using autmoatic calibration"
             tracker.send_command("remote_cal_enable = 0")
             tracker.tracker.setAutoCalibrationPacing(paval)
         # Execute custom calibration display
