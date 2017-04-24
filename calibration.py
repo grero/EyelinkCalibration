@@ -62,6 +62,7 @@ class Calibration(psychocal.psychocal):
             self.window.flip()
 
     def erase_cal_target(self):
+        #TODO: We should be able to put the reward here
         if self.use_gabor:
             self.animate = False
         self.window.flip()
