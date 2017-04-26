@@ -6,7 +6,7 @@ deg2pix = monitorunittools.deg2pix
 
 class Calibration(psychocal.psychocal):
     def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,
-                 target_image=None,use_gabor=False):
+                 target_image=None,use_gabor=False,movie_stim=None):
         psychocal.psychocal.__init__(self, w, h, tracker, window)
         self.reward = reward
         self.duration = reward.duration
@@ -15,7 +15,9 @@ class Calibration(psychocal.psychocal):
         self.use_gabor = use_gabor
         self.correct_fixation = False
         self.tcolor = target_color
-        if target_image is None:
+        if movie_stim is not None:
+            self.targetout = visual.MovieStim(self.window, movie_stim, flipVert=False)
+        elif target_image is None:
             if not use_gabor:
                 self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
                                        fillColor=self.tcolor,
@@ -127,7 +129,7 @@ class Calibration(psychocal.psychocal):
 
 def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
               target_size=1.0,target_image=None,use_gabor=False,pulse_dot=False,
-              manual_calibration=False):
+              manual_calibration=False,movie_stim=None):
     """
     Calibrates eye-tracker using psychopy stimuli.
     :param tracker: Tracker object to communicate with eyelink
@@ -151,7 +153,8 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
     # Generate custom calibration stimuli
     genv = Calibration(tracker.sres[0], tracker.sres[1],
                                tracker.tracker, tracker.win, reward,
-                       target_color, target_size,target_image,use_gabor)
+                       target_color, target_size,target_image,use_gabor,
+                       movie_stim)
 
     if tracker.realconnect:
         # Set calibration type
