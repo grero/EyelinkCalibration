@@ -14,10 +14,12 @@ class Calibration(psychocal.psychocal):
         self.animate = False
         self.use_gabor = use_gabor
         self.correct_fixation = False
+        self.use_movie = False
         self.tcolor = target_color
         if movie_stim is not None:
             self.targetout = visual.MovieStim(self.window, movie_stim, flipVert=False,
                                               size=target_size, pos=(0,0))
+            self.use_movie = True
         elif target_image is None:
             if not use_gabor:
                 self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
@@ -57,7 +59,7 @@ class Calibration(psychocal.psychocal):
 
         # Set calibration target position
         self.targetout.pos = (x, y)
-        if self.use_gabor:
+        if self.use_gabor or self.use_movie:
             self.animate = True
         else:
             # Display
@@ -68,7 +70,8 @@ class Calibration(psychocal.psychocal):
         if self.correct_fixation:
             self.reward.deliver()
             self.correct_fixation = False
-        if self.use_gabor:
+
+        if self.use_gabor or self.use_movie:
             self.animate = False
         self.window.flip()
 
@@ -120,8 +123,9 @@ class Calibration(psychocal.psychocal):
 
             ky.append(pylink.KeyInput(pylink_key, 0))
         #update the phase here as this function is polled regularly
-        if self.use_gabor and self.animate:
-            self.targetout.phase += 0.05 #update the grating phase
+        if self.animate:
+            if self.use_gabor:
+                self.targetout.phase += 0.05 #update the grating phase
             self.targetout.draw()
             self.window.flip()
         return ky
