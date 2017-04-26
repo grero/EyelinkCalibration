@@ -16,7 +16,8 @@ class Calibration(psychocal.psychocal):
         self.correct_fixation = False
         self.tcolor = target_color
         if movie_stim is not None:
-            self.targetout = visual.MovieStim(self.window, movie_stim, flipVert=False)
+            self.targetout = visual.MovieStim(self.window, movie_stim, flipVert=False,
+                                              size=target_size, pos=(0,0))
         elif target_image is None:
             if not use_gabor:
                 self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
