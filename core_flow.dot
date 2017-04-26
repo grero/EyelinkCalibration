@@ -1,0 +1,25 @@
+digraph{
+  label="Flow of the core loop";
+  start[shape="box",style="rounded"]
+  fixating[shape="diamond", style=""];
+  grace_period[shape="diamond", style=""];
+  fixation_criteria[shape="diamond", style=""];
+  reward[shape="box", style="rounded"];
+  failure[shape="box", style="rounded"];
+  end[shape="box", style="rounded"];
+
+  start -> fixating;
+  fixating -> end[label="no"];
+  fixating -> grace_period;
+  grace_period -> fixation_criteria[label="yes"];
+  grace_period -> end[label="no"];
+  fixation_criteria -> reward[label="yes"];
+  fixation_criteria -> failure[label="no"];
+  failure->end;
+  reward->end;
+  end->start;
+}
+ 
+
+  
+
