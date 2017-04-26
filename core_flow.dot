@@ -6,6 +6,7 @@ digraph{
   fixation_criteria[shape="diamond", style=""];
   reward[shape="box", style="rounded"];
   failure[shape="box", style="rounded"];
+  feedback[shape="box", style="rounded"];
   end[shape="box", style="rounded"];
 
   fixating[label="Eye position\nwithin fixation window?"];
@@ -19,8 +20,9 @@ digraph{
   grace_period -> end[label="no"];
   fixation_criteria -> reward[label="yes"];
   fixation_criteria -> failure[label="no"];
-  failure->end;
-  reward->end;
+  failure->feedback;
+  reward->feedback;
+  feedback->end; 
   end->start;
 }
  
