@@ -8,6 +8,10 @@ digraph{
   failure[shape="box", style="rounded"];
   end[shape="box", style="rounded"];
 
+  fixating[label="Eye position\nwithin fixation window?"];
+  grace_period[label="Grace period\nexceeded?"];
+  fixation_criteria[label="Fixating period\nexceeded?"];
+
   start -> fixating;
   fixating -> end[label="no"];
   fixating -> grace_period;
