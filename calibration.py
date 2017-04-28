@@ -13,7 +13,7 @@ class Calibration(psychocal.psychocal):
         self.phase = 0.0
         self.animate = False
         self.use_gabor = use_gabor
-
+        self.correct_fixation = False
         self.tcolor = target_color
         if target_image is None:
             if not use_gabor:
@@ -37,7 +37,7 @@ class Calibration(psychocal.psychocal):
 
     def play_beep(self,beepid):
         if beepid == pylink.DC_TARG_BEEP or beepid == pylink.CAL_TARG_BEEP:
-            self.reward.deliver()
+            #self.reward.deliver()
             self.__target_beep__.play()
         elif beepid == pylink.CAL_ERR_BEEP or beepid == pylink.DC_ERR_BEEP:
             self.__target_beep__error__.play()
@@ -62,7 +62,9 @@ class Calibration(psychocal.psychocal):
             self.window.flip()
 
     def erase_cal_target(self):
-        #TODO: We should be able to put the reward here
+        if self.correct_fixation:
+            self.reward.deliver()
+            self.correct_fixation = False
         if self.use_gabor:
             self.animate = False
         self.window.flip()
@@ -95,6 +97,7 @@ class Calibration(psychocal.psychocal):
                 pylink_key = pylink.ESC_KEY
             elif key == "return":
                 #self.reward.deliver()
+                self.correct_fixation = True
                 pylink_key = pylink.ENTER_KEY
             elif key == "pageup":
                 pylink_key = pylink.PAGE_UP
