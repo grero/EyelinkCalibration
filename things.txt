@@ -34,3 +34,5 @@ we need to get a BNC to RCA converter for the camera, so that we can connect it 
 
 Regarding calibration, Eyelink will also use the latest calibration model, i.e. calibrating on Monday and running a
 different experiment on Tuesday will use Monday's calibration.
+
+Can we get a new solenoid? One that doesn't overheat so easily, preferably one that runs on lower voltage.
