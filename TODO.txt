@@ -1,7 +1,6 @@
 #TODO: Reset all counters when the subject name changes
 #FIXME: The program crashes sometimes, possiblity after overlaying the video ontop of the gray screen
 #TODO: Use a pulsating dot as the calibration target
-#TODO: USe video as tracking stimulus
 #FIXME: Look into why rewarded fixations appear to fall outside the allowed window.
 #TODO: Add uncertainty to the fixation tracking
 #TODO: Maintain a count of total reward, correct, and incorrect trials for the day
