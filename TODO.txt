@@ -1,3 +1,4 @@
+#TODO: Figure out how to set the strobe pin
 #TODO: Finalize encoding of target/distractor location/identity
 #TODO: Find a way to reward only when a fixation is accepted during calibration
 #TODO: Reset all counters when the subject name changes
