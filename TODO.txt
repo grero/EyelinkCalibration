@@ -1,4 +1,6 @@
 #TODO: Figure out how to set the strobe pin
+#TODO: If the program crashes, it will start at 2 the next time it runs
+#TODO: Aboring the calibration too many times hangs the progrogram
 #TODO: Finalize encoding of target/distractor location/identity
 #TODO: Find a way to reward only when a fixation is accepted during calibration
 #TODO: Reset all counters when the subject name changes
