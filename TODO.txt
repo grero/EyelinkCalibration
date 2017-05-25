@@ -1,3 +1,4 @@
+#TODO: Allow target to appear at the fixation and stay throughout the trial
 #TODO: Figure out how to set the strobe pin
 #TODO: If the program crashes, it will start at 2 the next time it runs
 #TODO: Aboring the calibration too many times hangs the progrogram
