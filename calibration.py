@@ -6,16 +6,21 @@ deg2pix = monitorunittools.deg2pix
 
 class Calibration(psychocal.psychocal):
     def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,
-                 target_image=None,use_gabor=False):
+                 target_image=None,use_gabor=False,movie_stim=None):
         psychocal.psychocal.__init__(self, w, h, tracker, window)
         self.reward = reward
         self.duration = reward.duration
         self.phase = 0.0
         self.animate = False
         self.use_gabor = use_gabor
-
+        self.correct_fixation = False
+        self.use_movie = False
         self.tcolor = target_color
-        if target_image is None:
+        if movie_stim is not None:
+            self.targetout = visual.MovieStim(self.window, movie_stim, flipVert=False,
+                                              size=target_size, pos=(0,0))
+            self.use_movie = True
+        elif target_image is None:
             if not use_gabor:
                 self.targetout = visual.Circle(self.window, pos=(0, 0), radius=target_size,
                                        fillColor=self.tcolor,
@@ -37,7 +42,7 @@ class Calibration(psychocal.psychocal):
 
     def play_beep(self,beepid):
         if beepid == pylink.DC_TARG_BEEP or beepid == pylink.CAL_TARG_BEEP:
-            self.reward.deliver()
+            #self.reward.deliver()
             self.__target_beep__.play()
         elif beepid == pylink.CAL_ERR_BEEP or beepid == pylink.DC_ERR_BEEP:
             self.__target_beep__error__.play()
@@ -54,7 +59,7 @@ class Calibration(psychocal.psychocal):
 
         # Set calibration target position
         self.targetout.pos = (x, y)
-        if self.use_gabor:
+        if self.use_gabor or self.use_movie:
             self.animate = True
         else:
             # Display
@@ -62,8 +67,11 @@ class Calibration(psychocal.psychocal):
             self.window.flip()
 
     def erase_cal_target(self):
-        #TODO: We should be able to put the reward here
-        if self.use_gabor:
+        if self.correct_fixation:
+            self.reward.deliver()
+            self.correct_fixation = False
+
+        if self.use_gabor or self.use_movie:
             self.animate = False
         self.window.flip()
 
@@ -95,6 +103,7 @@ class Calibration(psychocal.psychocal):
                 pylink_key = pylink.ESC_KEY
             elif key == "return":
                 #self.reward.deliver()
+                self.correct_fixation = True
                 pylink_key = pylink.ENTER_KEY
             elif key == "pageup":
                 pylink_key = pylink.PAGE_UP
@@ -114,8 +123,9 @@ class Calibration(psychocal.psychocal):
 
             ky.append(pylink.KeyInput(pylink_key, 0))
         #update the phase here as this function is polled regularly
-        if self.use_gabor and self.animate:
-            self.targetout.phase += 0.05 #update the grating phase
+        if self.animate:
+            if self.use_gabor:
+                self.targetout.phase += 0.05 #update the grating phase
             self.targetout.draw()
             self.window.flip()
         return ky
@@ -124,7 +134,7 @@ class Calibration(psychocal.psychocal):
 
 def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
               target_size=1.0,target_image=None,use_gabor=False,pulse_dot=False,
-              manual_calibration=False):
+              manual_calibration=False,movie_stim=None):
     """
     Calibrates eye-tracker using psychopy stimuli.
     :param tracker: Tracker object to communicate with eyelink
@@ -148,7 +158,8 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
     # Generate custom calibration stimuli
     genv = Calibration(tracker.sres[0], tracker.sres[1],
                                tracker.tracker, tracker.win, reward,
-                       target_color, target_size,target_image,use_gabor)
+                       target_color, target_size,target_image,use_gabor,
+                       movie_stim)
 
     if tracker.realconnect:
         # Set calibration type
@@ -157,6 +168,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
 
         # Set calibration pacing
         if manual_calibration:
+            print "Using manual calibration"
             tracker.send_command("remote_cal_enable = 1")
             tracker.send_command("key_function 1 'remote_cal_target 1'")
             tracker.send_command("key_function 2 'remote_cal_target 2'")
@@ -169,6 +181,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
             tracker.send_command("key_function 9 'remote_cal_target 9'")
             tracker.send_command("key_function y 'remote_cal_complete'")
         else:
+            print "Using autmoatic calibration"
             tracker.send_command("remote_cal_enable = 0")
             tracker.tracker.setAutoCalibrationPacing(paval)
         # Execute custom calibration display
