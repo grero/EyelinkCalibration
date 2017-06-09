@@ -1,3 +1,4 @@
+#TODO: Make sure that all targets are turned off upon failure
 #TODO: Fix persistent asynchrony between trial start and target onset
 #TODO: Make sure the basic fixation task also works in the saccade task
 
