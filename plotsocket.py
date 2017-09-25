@@ -42,3 +42,8 @@ def test(port=4578):
             y += np.random.randn()
             client.plot(x,y)
             time.sleep(0.1)
+
+
+
+
+
