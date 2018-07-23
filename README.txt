@@ -8,7 +8,7 @@ To start the Fixation task program, please follow these steps:
 4.1) It's typically a good idea to choose 9 point calibration with white as the calibration color and "Circle"
      as the calibration stimulus
 5) Once you are satisfied with the parameters, press "Start". You should hear the reward system clicking a few times
-5.1) If you don't hear any clicking, make sure that the "Seral port" under the "Reward" tab is set to "com4"
+5.1) If you don't hear any clicking, make sure that the "Serial port" under the "Reward" tab is set to "com4"
 6) Once you see the gray screen, click "Calibrate" on the Eyelink screen.
 7) As you go through he calibration, click "Accept fixation" on the calibration screen (or press "Enter" on the stimulus computer keyobard) to accept each fixation in turn
 8) It is advisable to run through the calibration a few times. To do so, just click "Restart" on the Eyelink sceen
