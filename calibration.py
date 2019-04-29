@@ -1,8 +1,24 @@
+import sys
 import pylink
 from pylinkwrapper import psychocal
 from psychopy import sound, visual,event, tools
 from psychopy.tools import monitorunittools
 deg2pix = monitorunittools.deg2pix
+
+#define colors
+red = (1.0, 0.0, 0.0)
+green = (0.0, 1.0, 0.0)
+white = (1.0, 1.0, 1.0)
+black = (-1.0, -1.0, -1.0)
+blue = (-1.0, -1.0, 1.0)
+yellow = (1.0, 1.0, -1.0)
+
+colors = {"red": red,
+          "green": green,
+          "white": white,
+          "black": black,
+          "blue": blue,
+          "yellow": yellow}
 
 class Calibration(psychocal.psychocal):
     def __init__(self, w,h, tracker, window,reward, target_color=1,target_size=20,
