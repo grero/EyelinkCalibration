@@ -230,6 +230,12 @@ def start_calibration(exp_info):
         allowGUI=True, allowStencil=False,
         monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
         blendMode='avg', useFBO=False)
+
+    #reward
+    serialpath = exp_info.get("serial_port", "")
+    calibration_reward_duration = exp_info.get("calibration_reward_duration", 0.5)
+    reward_cnx = utils.Reward(serialpath, calibration_reward_duration)
+
     calibration_stim = exp_info.get("calibration_stimulus")
     manual_calibration = exp_info.get("manual_calibration", False)
     pulse_dot = exp_info.get("Pulse", False) # whether to pulse the dot
