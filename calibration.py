@@ -283,3 +283,4 @@ def start_calibration(exp_info):
                           pulse_dot=pulse_dot,
                           manual_calibration=manual_calibration,
                           movie_stim=calibration_movie_path)
+    win.close()
