@@ -212,3 +212,61 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
         genv.dummynote()
 
 
+def start_calibration(exp_info):
+    """
+    Parse calibration from exp_info and start the calibration
+    """
+    screen_width = exp_info.get("screen_width", 1680)
+    screen_height = exp_info.get("screen_height", 1050)
+    #setup window
+    if sys.platform == 'darwin':
+        fullscreen = False
+    else:
+        fullscreen = True
+
+    win = visual.Window(
+        size=(screen_width, screen_height), fullscr=fullscreen, screen=1,
+        allowGUI=True, allowStencil=False,
+        monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
+        blendMode='avg', useFBO=False)
+    calibration_stim = exp_info.get("calibration_stimulus")
+    manual_calibration = exp_info.get("manual_calibration", False)
+    pulse_dot = exp_info.get("Pulse", False) # whether to pulse the dot
+    if calibration_stim == "Gabor patch":
+        use_calibration_gabor = True
+        calibration_image_path = None
+    else:
+        use_calibration_gabor = False
+        if not (calibration_stim == "Circle"):
+            calibration_image_path = calibration_stim
+        else:
+            calibration_image_path = None
+    calibration_target_size = exp_info.get("calibration_target_size", 1.0)/2
+    if (calibration_image_path is not None) or (use_calibration_gabor):
+        """
+        for circle, the size is given as a radius. For image or gabor patch, we need
+        to multiple by two to get the diameter
+        """
+        calibration_target_size *= 2
+    # convert from degress to pixels
+    calibration_target_size = deg2pix(calibration_target_size,win.monitor)
+    calibration_target_color = colors[exp_info.get("calibration_target_color", "white")]
+    ctype = exp_info.get("calibration_type", "9 points")
+    cnum = int(ctype.split()[0])
+    # change reward duration during calibration
+    calibration_reward_duration = exp_info.get("calibration_reward_duration", 0.5)
+    reward_cnx.duration = calibration_reward_duration
+    calibration_movie_path = None
+    if calibration_image_path is not None:
+        bn, ext = os.path.splitext(calibration_image_path)
+        if ext in [".mp4"]:
+            calibration_movie_path = calibration_image_path
+            calibration_image_path = None
+    calibrate(tracker, reward_cnx, cnum=cnum,
+                          target_color=calibration_target_color,
+                          target_size=calibration_target_size,
+                          target_image=calibration_image_path,
+                          use_gabor=use_calibration_gabor,
+                          pulse_dot=pulse_dot,
+                          manual_calibration=manual_calibration,
+                          movie_stim=calibration_movie_path)
