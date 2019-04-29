@@ -269,6 +269,12 @@ def start_calibration(exp_info):
         if ext in [".mp4"]:
             calibration_movie_path = calibration_image_path
             calibration_image_path = None
+
+    filename = "eyecal"
+    day = exp_info.get("day", data.getDateStr("%d")).lstrip("0")
+    month = exp_info.get("month", data.getDateStr("%m")).lstrip("0")
+    filename = '%s%s_%s_%s' % (subject[:2], month, day,"ec")
+    tracker = connector.Connect(window=win, edfname=filename + '.edf')
     calibrate(tracker, reward_cnx, cnum=cnum,
                           target_color=calibration_target_color,
                           target_size=calibration_target_size,
