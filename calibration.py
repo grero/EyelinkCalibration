@@ -1,8 +1,9 @@
 import sys
 import pylink
-from pylinkwrapper import psychocal
+from pylinkwrapper import psychocal, connector
 from psychopy import sound, visual,event, tools
 from psychopy.tools import monitorunittools
+import utils
 deg2pix = monitorunittools.deg2pix
 
 #define colors
