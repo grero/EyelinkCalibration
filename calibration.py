@@ -1,7 +1,7 @@
 import sys
 import pylink
 from pylinkwrapper import psychocal, connector
-from psychopy import sound, visual,event, tools
+from psychopy import sound, visual,event, tools, data
 from psychopy.tools import monitorunittools
 import utils
 deg2pix = monitorunittools.deg2pix
@@ -271,6 +271,8 @@ def start_calibration(exp_info):
             calibration_image_path = None
 
     filename = "eyecal"
+    subject = exp_info.get("subject", "r")
+    session = exp_info.get("session", 1)
     day = exp_info.get("day", data.getDateStr("%d")).lstrip("0")
     month = exp_info.get("month", data.getDateStr("%m")).lstrip("0")
     filename = '%s%s_%s_%s' % (subject[:2], month, day,"ec")
