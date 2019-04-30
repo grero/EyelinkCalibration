@@ -4,6 +4,7 @@ from pylinkwrapper import psychocal, connector
 from psychopy import sound, visual,event, tools, data
 from psychopy.tools import monitorunittools
 import utils
+import os
 deg2pix = monitorunittools.deg2pix
 
 #define colors
