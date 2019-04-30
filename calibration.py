@@ -277,6 +277,7 @@ def start_calibration(exp_info):
     day = exp_info.get("day", data.getDateStr("%d")).lstrip("0")
     month = exp_info.get("month", data.getDateStr("%m")).lstrip("0")
     filename = '%s%s_%s_%s' % (subject[:2], month, day,"ec")
+    data_dir = 'data'
     tracker = connector.Connect(window=win, edfname=filename + '.edf')
     calibrate(tracker, reward_cnx, cnum=cnum,
                           target_color=calibration_target_color,
