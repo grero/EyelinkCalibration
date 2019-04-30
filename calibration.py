@@ -284,3 +284,7 @@ def start_calibration(exp_info):
                           manual_calibration=manual_calibration,
                           movie_stim=calibration_movie_path)
     win.close()
+    tracker.record_off()
+    tracker.end_experiment(os.path.join(os.getcwd(), data_dir))
+    if not reward_cnx.dummy:
+        reward_cnx.port.close()
