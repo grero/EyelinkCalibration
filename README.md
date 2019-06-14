@@ -1,6 +1,34 @@
+# Installation
+
+```sh
+conda create -y fixationtask python=2.7
+source activate fixationtask
+conda install numpy scipy matplotlib pandas pyopengl pillow lxml openpyxl xlrd configobj pyyaml gevent greenlet msgpack-python psutil pytables requests cffi seaborn wxpython cython pyzmq pyserial
+conda install -c conda-forge pyglet pysoundfile python-bidi moviepy pyosf
+pip install zmq json-tricks pyparallel sounddevice pygame pysoundcard psychopy_ext psychopy
+pip install git+https://github.com/grero/pylinkwrapper.git#egg=pylinkwrapper
+conda install pyqt==4.11.4
+```
+
+In addition, the pylink package should be copied from the Eyelink directory to the site-packages directory of the `fixationtask` environment.
+On a macOS, this could be
+
+```sh
+cp -r  /Applications/Eyelink/pylink/pylink2.7 ~/anaconda/envs/fixationtask/lib/python2.7/site-packages/pylink
+```
+
+# Usage
+
 To start the Fixation task program, please follow these steps:
 
 1) Click the "FixationTask" shortcut on the Destkop
+ or
+1\*) Run this command from the command line
+
+```sh
+python gui.py
+```  
+
 2) If you have a previous setting you would like to use, click the Load button
 2.1) Select the file you want to load, e.g. w4_11_4_settings.txt, for settings for the 4th session of Wiesel's training conducted on the 11th of April
 3) Make sure that the "Calibration" check box is checked under the "Setup" tab
