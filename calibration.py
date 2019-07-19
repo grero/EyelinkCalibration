@@ -209,6 +209,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
         pylink.openGraphicsEx(genv)
 
         # Calibrate
+        # TODO: We only exit from this mode by pressing "ESC" on the keyboard
         tracker.tracker.doTrackerSetup(tracker.sres[0], tracker.sres[1])
     else:
         genv.dummynote()
