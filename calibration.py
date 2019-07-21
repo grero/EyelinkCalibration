@@ -186,7 +186,7 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
 
         # Set calibration pacing
         if manual_calibration:
-            print "Using manual calibration"
+            print("Using manual calibration")
             tracker.send_command("remote_cal_enable = 1")
             tracker.send_command("key_function 1 'remote_cal_target 1'")
             tracker.send_command("key_function 2 'remote_cal_target 2'")
@@ -199,13 +199,13 @@ def calibrate(tracker, reward, cnum=13, paval=1000,target_color=1,
             tracker.send_command("key_function 9 'remote_cal_target 9'")
             tracker.send_command("key_function y 'remote_cal_complete'")
         else:
-            print "Using autmoatic calibration"
+            print("Using autmoatic calibration")
             tracker.send_command("remote_cal_enable = 0")
             tracker.tracker.setAutoCalibrationPacing(paval)
         # Execute custom calibration display
-        print '*' * 150
-        print 'Calibration Mode'
-        print '*' * 150
+        print('*' * 150)
+        print('Calibration Mode')
+        print('*' * 150)
         pylink.openGraphicsEx(genv)
 
         # Calibrate
