@@ -1,20 +1,17 @@
 # Installation
 
 ```sh
-conda create -y fixationtask python=2.7
+conda create -y -n fixationtask python=3.6
 source activate fixationtask
-conda install numpy scipy matplotlib pandas pyopengl pillow lxml openpyxl xlrd configobj pyyaml gevent greenlet msgpack-python psutil pytables requests cffi seaborn wxpython cython pyzmq pyserial
-conda install -c conda-forge pyglet pysoundfile python-bidi moviepy pyosf
-pip install zmq json-tricks pyparallel sounddevice pygame pysoundcard psychopy_ext psychopy
 pip install git+https://github.com/grero/pylinkwrapper.git#egg=pylinkwrapper
-conda install pyqt==4.11.4
+pip install PyQt5
 ```
 
 In addition, the pylink package should be copied from the Eyelink directory to the site-packages directory of the `fixationtask` environment.
 On a macOS, this could be
 
 ```sh
-cp -r  /Applications/Eyelink/pylink/pylink2.7 ~/anaconda/envs/fixationtask/lib/python2.7/site-packages/pylink
+cp -r  /Applications/Eyelink/pylink/pylink3.6 ~/anaconda/envs/fixationtask/lib/python3.6/site-packages/pylink
 ```
 
 # Usage
@@ -26,7 +23,7 @@ To start the Fixation task program, please follow these steps:
 1\*) Run this command from the command line
 
 ```sh
-python gui.py
+pythonw gui.py
 ```  
 
 2) If you have a previous setting you would like to use, click the Load button
