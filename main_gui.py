@@ -2,7 +2,6 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUiType
 import os
-import main
 import utils
 import json
 import datetime
