@@ -5,6 +5,7 @@ First, create a fresh environment.
 ```sh
 conda create -y -n eyelink python=3.6
 source activate eyelink
+pip install git+https://github.com/grero/pylinkwrapper
 ```
 
 Prior to installing the package, the pylink package should be copied from the Eyelink directory to the site-packages directory of the `eyelink` environment.
