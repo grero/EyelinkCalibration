@@ -2,10 +2,9 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUiType
 import os
-import utils
 import json
 import datetime
-import calibration
+from . import calibration
 
 Ui_MainWindow, QMainWindow = loadUiType("main_gui.ui")
 
