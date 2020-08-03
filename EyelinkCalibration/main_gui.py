@@ -130,9 +130,12 @@ class Main(QMainWindow, Ui_MainWindow):
         calibration.start_calibration(exp_info)
 
 
-if __name__ == "__main__":
-
+def main():
     app = QtWidgets.QApplication(sys.argv)
     myapp = Main()
     myapp.show()
     sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    main()
