@@ -56,7 +56,6 @@ if __name__ == "__main__":
             if data == "":
                 break
             x,y = [float(x) for x in data.split(",")]
-            print x,y
             explot.update_eyepos(x,y)
             pylab.draw()
 
