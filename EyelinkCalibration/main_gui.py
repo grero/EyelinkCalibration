@@ -6,7 +6,8 @@ import json
 import datetime
 from . import calibration
 
-Ui_MainWindow, QMainWindow = loadUiType("main_gui.ui")
+pth, ff = os.path.split(__file__)
+Ui_MainWindow, QMainWindow = loadUiType(os.path.join(pth, "main_gui.ui"))
 
 
 class Main(QMainWindow, Ui_MainWindow):
