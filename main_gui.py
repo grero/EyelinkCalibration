@@ -69,8 +69,6 @@ class Main(QMainWindow, Ui_MainWindow):
 
             self.serial_path.setText(str(exp_info.get("serial_port", "")))
 
-            self.play_sound.setChecked(bool(exp_info.get("pay_sound", True)))
-
             #  calibration
             self.calibration_reward_duration.setText(str(exp_info.get("calibration_reward_duration", 0.5)))
             self.calibration_target_size.setText(str(exp_info.get("calibration_target_size", 1.0)))
@@ -105,7 +103,6 @@ class Main(QMainWindow, Ui_MainWindow):
         screen_distance = float(self.screen_distance.text())
         screen_size = float(self.screen_size.text())
         serialpath = str(self.serial_path.text())
-        play_sound = self.play_sound.isChecked()
 
         # calibration stuff
         calibration_reward_duration = float(self.calibration_reward_duration.text())
@@ -120,7 +117,6 @@ class Main(QMainWindow, Ui_MainWindow):
                     "screen_size": screen_size,
                     "screen_distance": screen_distance,
                     "serial_port": serialpath,
-                    "play_sound": play_sound,
                     "calibration_reward_duration": calibration_reward_duration,
                     "calibration_target_size": calibration_target_size,
                     "calibration_type": calibration_type,
