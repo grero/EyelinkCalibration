@@ -10,6 +10,9 @@ setup(name="EyelinkCalibration",
                                    ]
                    },
       install_requires=["PyQt5",
-                        "pylink"],
-      dependency_links=["https://github.com/grero/pylinkwrapper"],
+                        "pylink",
+                        "pyserial",
+                        "psychopy",
+                        "pyglet==1.3.2"],
+      dependency_links=["https://github.com/grero/pylinkwrapper/tarball/master"],
       )
