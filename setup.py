@@ -9,4 +9,7 @@ setup(name="EyelinkCalibration",
       entry_points={"gui_scripts": ["EyelinkCalibration = EyelinkCalibration.main_gui:main"
                                    ]
                    },
+      install_requires=["PyQt5",
+                        "pylink"],
+      dependency_links=["https://github.com/grero/pylinkwrapper"],
       )
